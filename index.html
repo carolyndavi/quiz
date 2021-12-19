@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="sass/main.css" />
+    <script src="js/app.js" defer></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <title>Stopwatch</title>
+  </head>
+  <body>
+    <div class="wrapper">
+      <div class="container">
+        <div class="clock stopwatch">
+          <span id="minutes">00</span>: <span id="seconds">00</span>:
+          <span id="milliseconds">00</span>
+        </div>
+
+        <div class="controls">
+          <button class="btn" id="play-btn">
+            <img
+              data-feather="play"
+              class="btn-img"
+              viewBox="0 0 60 55"
+              width="100"
+              height="50"
+            />
+          </button>
+          <button class="btn" id="pause-btn">
+            <img
+              data-feather="pause"
+              class="btn-img"
+              viewBox="0 0 60 55"
+              width="100"
+              height="50"
+            />
+          </button>
+          <button class="btn" id="stop-btn">
+            <img
+              data-feather="stop-circle"
+              class="btn-img"
+              viewBox="0 0 60 55"
+              width="100"
+              height="50"
+            />
+          </button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
