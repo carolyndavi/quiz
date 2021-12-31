@@ -4,37 +4,37 @@ const questions = [
   {
     question: 'What is 49 - 32?',
     choices: ['13', '17', '-17', '16', '697'],
-    correctAnswer: '17',
+    correctAnswer: 1,
   },
   {
     question: 'What is 70 - 14?',
     choices: ['18', '79', '56', '32', '34'],
-    correctAnswer: '56',
+    correctAnswer: 2,
   },
   {
     question: 'What is 80 - 15?',
     choices: ['74', '65', '93', '40', '975'],
-    correctAnswer: '65',
+    correctAnswer: 1,
   },
   {
     question: 'What is 10 - 20?',
     choices: ['-350', '-15', '-10', '-34', '-20'],
-    correctAnswer: '-10',
+    correctAnswer: 2,
   },
   {
     question: 'What is 56 + 11?',
     choices: ['102', '37', '44', '67', '50'],
-    correctAnswer: '67',
+    correctAnswer: 3,
   },
   {
     question: 'What is 21 - 16?',
     choices: ['170', '18', '5', '2', '26'],
-    correctAnswer: '5',
+    correctAnswer: 2,
   },
 ];
 
-let currentQuestionIndex = 0;
 let progressCounter = 0;
+let currentQuestionIndex;
 let questionText;
 let choiceText;
 let progressText;
@@ -70,7 +70,7 @@ nextButton.classList.add('next-button');
 nextButton.innerHTML = 'Next';
 buttonContainer.appendChild(nextButton);
 
-// if startButton is clicked
+// create startQuiz function
 startButton.addEventListener('click', startQuiz);
 
 function startQuiz() {
@@ -122,7 +122,7 @@ const createChoices = () => {
     choicePrefix.innerText = i;
     choiceContainer.appendChild(choicePrefix);
 
-    choiceText = document.createElement('p');
+    choiceText = document.createElement('button');
     choiceText.classList.add('choice-text');
     choiceText.innerText = questions[currentQuestionIndex].choices[i - 1];
     choiceContainer.appendChild(choiceText);
@@ -138,11 +138,11 @@ function nextQuestion() {
   questionText.innerText = questions[currentQuestionIndex].question;
   progressText.innerText = `${progressCounter} / ${questions.length}`;
 
-  const choiceOptions = questions[currentQuestionIndex].choices;
-  console.log(choiceOptions);
+  const possibleChoices = questions[currentQuestionIndex].choices;
+  const choiceOption = document.querySelectorAll('.choice-text');
 
-  for (let choice of choiceOptions) {
-    choiceText.innerText = choice;
+  for (let i = 0; i < possibleChoices.length; i++) {
+    choiceOption[i].innerText = possibleChoices[i];
   }
 }
 

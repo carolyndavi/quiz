@@ -49,33 +49,49 @@ body {
 
 .question-text {
   color: var(--color-secondary);
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 // CHOICE
 
 .choice-container {
   display: flex;
-  background: var(--color-white);
-  border-radius: 10px;
+  justify-content: space-around;
   color: var(--color-secondary);
   font-size: 2.5rem;
+  font-weight: 700;
   padding: 1rem 0;
   margin: 1rem auto;
   width: 80%;
+  --hue: var(--hue-neutral);
+}
 
-  &:hover {
-    cursor: pointer;
-  }
+.choice-container.correct {
+  --hue: var(--hue-correct);
+}
+
+.choice-container.incorrect {
+  --hue: var(--hue-incorrect);
 }
 
 .choice-prefix {
-  padding: 1.5rem 10rem 1.5rem 3rem;
+  padding: 1.5rem 2.3rem;
+  border-radius: 50%;
+  background: var(--color-white);
 }
 
 .choice-text {
+  border-radius: 10px;
+  background: var(--color-white);
   padding: 1.5rem;
-  width: 100%;
+  width: 80%;
+  border: none;
+  font-family: var(--font-primary);
+
+  &:hover {
+    cursor: pointer;
+    background: var(--color-white);
+  }
 }
 
 // BUTTONS
