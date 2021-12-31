@@ -1,4 +1,4 @@
-'use strict';
+('use strict');
 
 const questions = [
   {
@@ -102,7 +102,6 @@ function startQuiz() {
 const createQuestions = () => {
   const questionContainer = document.createElement('div');
   questionContainer.classList.add('question-container');
-  questionContainer.setAttribute('id', 'question');
   quizContainer.appendChild(questionContainer);
 
   questionText = document.createElement('h2');
@@ -139,8 +138,11 @@ function nextQuestion() {
   questionText.innerText = questions[currentQuestionIndex].question;
   progressText.innerText = `${progressCounter} / ${questions.length}`;
 
-  for (let i = 0; i < questions.length; i++) {
-    choiceText.innerText = questions[currentQuestionIndex].choices[i - 1];
+  const choiceOptions = questions[currentQuestionIndex].choices;
+  console.log(choiceOptions);
+
+  for (let choice of choiceOptions) {
+    choiceText.innerText = choice;
   }
 }
 
