@@ -34,10 +34,12 @@ const questions = [
 ];
 
 let progressCounter = 0;
-let currentQuestionIndex;
-let questionText;
-let choiceText;
-let progressText;
+let currentQuestionIndex,
+  questionText,
+  choiceText,
+  progressText,
+  possibleChoices,
+  choiceOptions;
 
 // creating and selecting elements
 const container = document.querySelector('.container');
@@ -138,11 +140,11 @@ function nextQuestion() {
   questionText.innerText = questions[currentQuestionIndex].question;
   progressText.innerText = `${progressCounter} / ${questions.length}`;
 
-  const possibleChoices = questions[currentQuestionIndex].choices;
-  const choiceOption = document.querySelectorAll('.choice-text');
+  possibleChoices = questions[currentQuestionIndex].choices;
+  choiceOptions = document.querySelectorAll('.choice-text');
 
   for (let i = 0; i < possibleChoices.length; i++) {
-    choiceOption[i].innerText = possibleChoices[i];
+    choiceOptions[i].innerText = possibleChoices[i];
   }
 }
 
@@ -154,4 +156,11 @@ function previousQuestion() {
   progressCounter--;
   questionText.innerText = questions[currentQuestionIndex].question;
   progressText.innerText = `${progressCounter} / ${questions.length}`;
+
+  possibleChoices = questions[currentQuestionIndex].choices;
+  choiceOptions = document.querySelectorAll('.choice-text');
+
+  for (let i = possibleChoices.length - 1; i >= 0; i--) {
+    choiceOptions[i].innerText = possibleChoices[i];
+  }
 }
