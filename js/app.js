@@ -1,40 +1,8 @@
 ('use strict');
 
-const questions = [
-  {
-    question: 'What is 49 - 32?',
-    choices: ['13', '17', '-17', '16', '697'],
-    correctAnswer: 1,
-  },
-  {
-    question: 'What is 70 - 14?',
-    choices: ['18', '79', '56', '32', '34'],
-    correctAnswer: 2,
-  },
-  {
-    question: 'What is 80 - 15?',
-    choices: ['74', '65', '93', '40', '975'],
-    correctAnswer: 1,
-  },
-  {
-    question: 'What is 10 - 20?',
-    choices: ['-350', '-15', '-10', '-34', '-20'],
-    correctAnswer: 2,
-  },
-  {
-    question: 'What is 56 + 11?',
-    choices: ['102', '37', '44', '67', '50'],
-    correctAnswer: 3,
-  },
-  {
-    question: 'What is 21 - 16?',
-    choices: ['170', '18', '5', '2', '26'],
-    correctAnswer: 2,
-  },
-];
-
-let progressCounter = 0;
-let currentQuestionIndex,
+// starting variables
+let questionCounter = 0;
+let questionIndex,
   questionText,
   choiceText,
   progressText,
@@ -72,7 +40,7 @@ nextButton.classList.add('next-button');
 nextButton.innerHTML = 'Next';
 buttonContainer.appendChild(nextButton);
 
-// startQuiz function
+// if start button is clicked
 startButton.addEventListener('click', startQuiz);
 
 function startQuiz() {
@@ -84,36 +52,32 @@ function startQuiz() {
   progressContainer.classList.add('progress-container');
   quizContainer.appendChild(progressContainer);
 
-  const progressItem = document.createElement('div');
-  progressItem.classList.add('progress-item');
-  progressContainer.appendChild(progressItem);
-
-  progressText = document.createElement('h3');
+  progressText = document.createElement('span');
   progressText.classList.add('progress-text');
-  progressText.innerText = `${progressCounter + 1} / ${questions.length}`;
-  progressItem.appendChild(progressText);
-  progressCounter++;
+  progressText.innerText = `${questionCounter + 1} / ${questions.length}`;
+  progressContainer.appendChild(progressText);
+  questionCounter++;
 
-  currentQuestionIndex = 0;
+  questionIndex = 0;
 
-  createQuestions();
-  createChoices();
+  showQuestions();
+  showChoices();
 }
 
-// createQuestions function
-const createQuestions = () => {
+// getting questions from array
+const showQuestions = () => {
   const questionContainer = document.createElement('div');
   questionContainer.classList.add('question-container');
   quizContainer.appendChild(questionContainer);
 
   questionText = document.createElement('h2');
   questionText.classList.add('question-text');
-  questionText.innerText = questions[currentQuestionIndex].question;
+  questionText.innerText = questions[questionIndex].question;
   questionContainer.appendChild(questionText);
 };
 
-// createChoices function
-const createChoices = () => {
+// getting choices from array
+const showChoices = () => {
   for (let i = 1; i < questions.length; i++) {
     const choiceContainer = document.createElement('div');
     choiceContainer.classList.add('choice-container');
@@ -126,53 +90,76 @@ const createChoices = () => {
 
     choiceText = document.createElement('button');
     choiceText.classList.add('choice-text');
-    choiceText.innerText = questions[currentQuestionIndex].choices[i - 1];
+    choiceText.innerText = questions[questionIndex].choices[i - 1];
     choiceContainer.appendChild(choiceText);
+  }
+
+  const selectChoice = document.querySelectorAll('.choice-text');
+  for (let i = 0; i < selectChoice.length; i++) {
+    selectChoice[i].setAttribute('onclick', 'selectedChoices(this)');
   }
 };
 
-// nextQuestion function
+// if next button is clicked
 nextButton.addEventListener('click', nextQuestion);
 
 function nextQuestion() {
-  currentQuestionIndex++;
-  progressCounter++;
-  questionText.innerText = questions[currentQuestionIndex].question;
-  progressText.innerText = `${progressCounter} / ${questions.length}`;
+  if (questionCounter < questions.length) {
+    questionIndex++;
+    questionCounter++;
+    questionText.innerText = questions[questionIndex].question;
+    progressText.innerText = `${questionCounter} / ${questions.length}`;
 
-  possibleChoices = questions[currentQuestionIndex].choices;
-  choiceOptions = document.querySelectorAll('.choice-text');
+    possibleChoices = questions[questionIndex].choices;
+    choiceOptions = document.querySelectorAll('.choice-text');
 
-  for (let i = 0; i < possibleChoices.length; i++) {
-    choiceOptions[i].innerText = possibleChoices[i];
-  }
+    for (let i = 0; i < possibleChoices.length; i++) {
+      choiceOptions[i].innerText = possibleChoices[i];
+    }
 
-  if (progressCounter === questions.length) {
-    nextButton.innerText = 'Finish';
+    if (questionCounter === questions.length) {
+      nextButton.innerText = 'Finish';
+    }
+  } else {
+    console.log('questions completed');
   }
 }
 
-// previousQuestion function
+// if previous button is clicked
 previousButton.addEventListener('click', previousQuestion);
 
 function previousQuestion() {
-  currentQuestionIndex--;
-  progressCounter--;
+  if (questionCounter > questions.length - questions.length + 1) {
+    questionIndex--;
+    questionCounter--;
 
-  questionText.innerText = questions[currentQuestionIndex].question;
-  progressText.innerText = `${progressCounter} / ${questions.length}`;
+    questionText.innerText = questions[questionIndex].question;
+    progressText.innerText = `${questionCounter} / ${questions.length}`;
 
-  possibleChoices = questions[currentQuestionIndex].choices;
-  choiceOptions = document.querySelectorAll('.choice-text');
+    possibleChoices = questions[questionIndex].choices;
+    choiceOptions = document.querySelectorAll('.choice-text');
 
-  for (let i = possibleChoices.length - 1; i >= 0; i--) {
-    choiceOptions[i].innerText = possibleChoices[i];
-  }
+    for (let i = possibleChoices.length - 1; i >= 0; i--) {
+      choiceOptions[i].innerText = possibleChoices[i];
+    }
 
-  if (progressCounter === questions.length - 1) {
-    nextButton.innerText = 'Next';
+    if (questionCounter === questions.length - 1) {
+      nextButton.innerText = 'Next';
+    }
+  } else {
+    console.log('start questions');
   }
 }
 
-// selectedOption function
-function selectedOption() {}
+// select choices
+function selectedChoices(answer) {
+  let userAnswer = answer.textContent;
+  let correctAnswer = questions[questionIndex].answer;
+  if (userAnswer === correctAnswer) {
+    answer.classList.add('correct');
+    console.log('Answer is correct');
+  } else {
+    answer.classList.add('incorrect');
+    console.log('Answer is wrong');
+  }
+}
