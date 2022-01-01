@@ -72,7 +72,7 @@ nextButton.classList.add('next-button');
 nextButton.innerHTML = 'Next';
 buttonContainer.appendChild(nextButton);
 
-// create startQuiz function
+// startQuiz function
 startButton.addEventListener('click', startQuiz);
 
 function startQuiz() {
@@ -146,6 +146,10 @@ function nextQuestion() {
   for (let i = 0; i < possibleChoices.length; i++) {
     choiceOptions[i].innerText = possibleChoices[i];
   }
+
+  if (progressCounter === questions.length) {
+    nextButton.innerText = 'Finish';
+  }
 }
 
 // previousQuestion function
@@ -154,6 +158,7 @@ previousButton.addEventListener('click', previousQuestion);
 function previousQuestion() {
   currentQuestionIndex--;
   progressCounter--;
+
   questionText.innerText = questions[currentQuestionIndex].question;
   progressText.innerText = `${progressCounter} / ${questions.length}`;
 
@@ -163,4 +168,11 @@ function previousQuestion() {
   for (let i = possibleChoices.length - 1; i >= 0; i--) {
     choiceOptions[i].innerText = possibleChoices[i];
   }
+
+  if (progressCounter === questions.length - 1) {
+    nextButton.innerText = 'Next';
+  }
 }
+
+// selectedOption function
+function selectedOption() {}

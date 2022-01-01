@@ -63,21 +63,20 @@ body {
   padding: 1rem 0;
   margin: 1rem auto;
   width: 80%;
-  --hue: var(--hue-neutral);
-}
-
-.choice-container.correct {
-  --hue: var(--hue-correct);
-}
-
-.choice-container.incorrect {
-  --hue: var(--hue-incorrect);
 }
 
 .choice-prefix {
   padding: 1.5rem 2.3rem;
   border-radius: 50%;
   background: var(--color-white);
+}
+
+.choice-prefix.correct {
+  background-color: var(--color-correct);
+}
+
+.choice-prefix.incorrect {
+  background-color: var(--color-incorrect);
 }
 
 .choice-text {
@@ -92,6 +91,14 @@ body {
     cursor: pointer;
     background: var(--color-white);
   }
+}
+
+.choice-text.correct {
+  background-color: var(--color-correct);
+}
+
+.choice-text.incorrect {
+  background-color: var(--color-incorrect);
 }
 
 // BUTTONS
