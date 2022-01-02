@@ -177,7 +177,7 @@ function restartQuiz() {
 
   const totalScore = document.createElement('p');
   totalScore.classList.add('total-score');
-  totalScore.innerText = `You got ${correctAnswers} out of 6 questions right!`;
+  totalScore.innerText = `You've got ${correctAnswers} out of 6 questions right.`;
   container.appendChild(totalScore);
 
   const restartButtonContainer = document.createElement('div');
