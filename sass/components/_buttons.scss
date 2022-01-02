@@ -1,0 +1,30 @@
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 2rem;
+}
+
+.previous-button,
+.next-button,
+.start-button,
+.restart-button {
+  background-color: var(--color-primary);
+  width: 12rem;
+  height: 6rem;
+  border: none;
+  font-family: var(--font-primary);
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &:hover {
+    background: var(--color-hover);
+  }
+}
+
+.hide-element {
+  display: none;
+}

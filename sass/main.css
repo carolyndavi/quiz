@@ -1,4 +1,13 @@
 @import url("https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap");
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-size: 62.5%;
+}
+
 :root {
   --color-primary: #018080;
   --color-secondary: #222222;
@@ -9,15 +18,6 @@
   --color-incorrect: #ee1a1a;
 }
 
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-  font-size: 62.5%;
-}
-
 body {
   height: 100vh;
   width: 100vw;
@@ -26,6 +26,129 @@ body {
   justify-content: center;
   background: var(--color-secondary);
   font-family: var(--font-primary);
+}
+
+.button-container {
+  display: flex;
+  justify-content: space-evenly;
+  padding-top: 2rem;
+}
+
+.previous-button,
+.next-button,
+.start-button,
+.restart-button {
+  background-color: var(--color-primary);
+  width: 12rem;
+  height: 6rem;
+  border: none;
+  font-family: var(--font-primary);
+  font-size: 2.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.previous-button:hover,
+.next-button:hover,
+.start-button:hover,
+.restart-button:hover {
+  background: var(--color-hover);
+}
+
+.hide-element {
+  display: none;
+}
+
+.option-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-secondary);
+  font-size: 2.5rem;
+  font-weight: 700;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.option-list {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+}
+.option-list:hover {
+  cursor: pointer;
+}
+
+.option-number {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background: var(--color-white);
+}
+
+.option-prefix.correct {
+  background-color: var(--color-correct);
+}
+
+.option-prefix.incorrect {
+  background-color: var(--color-incorrect);
+}
+
+.option-text {
+  width: 80%;
+  border-radius: 10px;
+  background: var(--color-white);
+  display: flex;
+  font-size: 1.5rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-family: var(--font-primary);
+}
+
+.option-text.correct {
+  background-color: var(--color-correct);
+}
+
+.option-text.incorrect {
+  background-color: var(--color-incorrect);
+}
+
+.progress-container {
+  color: var(--color-secondary);
+  display: flex;
+  justify-content: center;
+  font-size: 5rem;
+  padding-bottom: 2rem;
+}
+
+.total-score {
+  font-size: 5rem;
+}
+
+.question-container {
+  background: var(--color-white);
+  border-radius: 10px;
+  padding: 2rem 0;
+  margin: 0 auto;
+  width: 80%;
+  text-align: center;
+}
+
+.question-text {
+  color: var(--color-secondary);
+  font-size: 2.5rem;
 }
 
 .quiz-container {
@@ -45,118 +168,4 @@ body {
 .quiz-counter {
   font-size: 2rem;
   padding-bottom: 1rem;
-}
-
-.question-container {
-  background: var(--color-white);
-  border-radius: 10px;
-  padding: 2rem 0;
-  margin: 0 auto;
-  width: 80%;
-  text-align: center;
-}
-
-.question-text {
-  color: var(--color-secondary);
-  font-size: 2.5rem;
-}
-
-.choice-container {
-  display: flex;
-  justify-content: center;
-  flex-direction: column;
-  align-items: center;
-  color: var(--color-secondary);
-  font-size: 2.5rem;
-  font-weight: 700;
-  width: 80%;
-  margin: 0 auto;
-  margin-top: 2rem;
-}
-
-.choice {
-  position: relative;
-  width: 100%;
-  display: flex;
-  justify-content: space-between;
-  margin: 1.2rem 0;
-}
-.choice:hover {
-  cursor: pointer;
-}
-
-.choice-number {
-  width: 50px;
-  height: 50px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.5rem;
-  border-radius: 50%;
-  background: var(--color-white);
-}
-
-.choice-prefix.correct {
-  background-color: var(--color-correct);
-}
-
-.choice-prefix.incorrect {
-  background-color: var(--color-incorrect);
-}
-
-.choice-text {
-  width: 80%;
-  border-radius: 10px;
-  background: var(--color-white);
-  display: flex;
-  font-size: 1.5rem;
-  text-align: center;
-  justify-content: center;
-  align-items: center;
-  border: none;
-  font-family: var(--font-primary);
-}
-
-.choice-text.correct {
-  background-color: var(--color-correct);
-}
-
-.choice-text.incorrect {
-  background-color: var(--color-incorrect);
-}
-
-.button-container {
-  display: flex;
-  justify-content: space-evenly;
-  padding-top: 2rem;
-}
-
-.previous-button,
-.next-button,
-.start-button {
-  background-color: var(--color-primary);
-  width: 12rem;
-  height: 6rem;
-  border: none;
-  font-family: var(--font-primary);
-  font-size: 2.5rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-.previous-button:hover,
-.next-button:hover,
-.start-button:hover {
-  background: var(--color-hover);
-}
-
-.hide-element {
-  display: none;
-}
-
-.progress-container {
-  color: var(--color-secondary);
-  display: flex;
-  justify-content: center;
-  font-size: 5rem;
-  padding-bottom: 2rem;
 }/*# sourceMappingURL=main.css.map */

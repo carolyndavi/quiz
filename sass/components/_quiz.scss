@@ -1,0 +1,18 @@
+.quiz-container {
+  width: 40rem;
+  height: 65rem;
+  background: var(--color-primary);
+  position: relative;
+}
+
+.quiz-title {
+  font-size: 4rem;
+  color: var(--color-secondary);
+  text-align: center;
+  padding-top: 1.5rem;
+}
+
+.quiz-counter {
+  font-size: 2rem;
+  padding-bottom: 1rem;
+}

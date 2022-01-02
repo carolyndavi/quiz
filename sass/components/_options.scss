@@ -1,0 +1,64 @@
+.option-container {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  color: var(--color-secondary);
+  font-size: 2.5rem;
+  font-weight: 700;
+  width: 80%;
+  margin: 0 auto;
+  margin-top: 2rem;
+}
+
+.option-list {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-top: 2rem;
+
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.option-number {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
+  border-radius: 50%;
+  background: var(--color-white);
+}
+
+.option-prefix.correct {
+  background-color: var(--color-correct);
+}
+
+.option-prefix.incorrect {
+  background-color: var(--color-incorrect);
+}
+
+.option-text {
+  width: 80%;
+  border-radius: 10px;
+  background: var(--color-white);
+  display: flex;
+  font-size: 1.5rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  border: none;
+  font-family: var(--font-primary);
+}
+
+.option-text.correct {
+  background-color: var(--color-correct);
+}
+
+.option-text.incorrect {
+  background-color: var(--color-incorrect);
+}
