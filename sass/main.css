@@ -32,6 +32,7 @@ body {
   width: 40rem;
   height: 65rem;
   background: var(--color-primary);
+  position: relative;
 }
 
 .quiz-title {
@@ -62,17 +63,35 @@ body {
 
 .choice-container {
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   color: var(--color-secondary);
   font-size: 2.5rem;
   font-weight: 700;
-  padding: 1rem 0;
-  margin: 1rem auto;
   width: 80%;
+  margin: 0 auto;
+  margin-top: 2rem;
 }
 
-.choice-prefix {
-  padding: 1.5rem 2.3rem;
+.choice {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin: 1.2rem 0;
+}
+.choice:hover {
+  cursor: pointer;
+}
+
+.choice-number {
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.5rem;
   border-radius: 50%;
   background: var(--color-white);
 }
@@ -86,16 +105,16 @@ body {
 }
 
 .choice-text {
+  width: 80%;
   border-radius: 10px;
   background: var(--color-white);
-  padding: 1.5rem;
-  width: 80%;
+  display: flex;
+  font-size: 1.5rem;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
   border: none;
   font-family: var(--font-primary);
-}
-.choice-text:hover {
-  cursor: pointer;
-  background: var(--color-white);
 }
 
 .choice-text.correct {

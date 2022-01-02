@@ -7,7 +7,8 @@ let questionIndex,
   choiceText,
   progressText,
   possibleChoices,
-  choiceOptions;
+  choiceOptions,
+  choice;
 
 // creating and selecting elements
 const container = document.querySelector('.container');
@@ -64,7 +65,7 @@ function startQuiz() {
   showChoices();
 }
 
-// getting questions from array
+// getting questions and choices from array
 const showQuestions = () => {
   const questionContainer = document.createElement('div');
   questionContainer.classList.add('question-container');
@@ -78,27 +79,46 @@ const showQuestions = () => {
 
 // getting choices from array
 const showChoices = () => {
+  const choiceContainer = document.createElement('div');
+  choiceContainer.classList.add('choice-container');
+  quizContainer.appendChild(choiceContainer);
+
   for (let i = 1; i < questions.length; i++) {
-    const choiceContainer = document.createElement('div');
-    choiceContainer.classList.add('choice-container');
-    quizContainer.appendChild(choiceContainer);
+    choice = document.createElement('div');
+    choice.classList.add('choice', 'choice' + [i]);
+    choiceContainer.appendChild(choice);
 
-    const choicePrefix = document.createElement('p');
-    choicePrefix.classList.add('choice-prefix') + [i];
-    choicePrefix.innerText = i;
-    choiceContainer.appendChild(choicePrefix);
+    const choiceNumber = document.createElement('div');
+    choiceNumber.classList.add('choice-number') + [i];
+    choiceNumber.innerText = i;
+    choice.appendChild(choiceNumber);
 
-    choiceText = document.createElement('button');
+    choiceText = document.createElement('div');
     choiceText.classList.add('choice-text');
     choiceText.innerText = questions[questionIndex].choices[i - 1];
-    choiceContainer.appendChild(choiceText);
+    choice.appendChild(choiceText);
   }
 
-  const selectChoice = document.querySelectorAll('.choice-text');
-  for (let i = 0; i < selectChoice.length; i++) {
-    selectChoice[i].setAttribute('onclick', 'selectedChoices(this)');
+  const choices = document.querySelectorAll('.choice-text');
+  for (let j = 0; j < choices.length; j++) {
+    choices[j].setAttribute('onclick', 'choiceSelected(this)');
   }
+  console.log(choices);
 };
+
+// select choices
+function choiceSelected(answer) {
+  const userAnswer = answer.textContent;
+  const correctAnswer = questions[questionIndex].answer;
+  console.log(userAnswer, correctAnswer);
+  if (userAnswer === correctAnswer) {
+    answer.classList.add('correct');
+    console.log('Answer is correct');
+  } else {
+    answer.classList.add('incorrect');
+    console.log('Answer is wrong');
+  }
+}
 
 // if next button is clicked
 nextButton.addEventListener('click', nextQuestion);
@@ -148,18 +168,5 @@ function previousQuestion() {
     }
   } else {
     console.log('start questions');
-  }
-}
-
-// select choices
-function selectedChoices(answer) {
-  let userAnswer = answer.textContent;
-  let correctAnswer = questions[questionIndex].answer;
-  if (userAnswer === correctAnswer) {
-    answer.classList.add('correct');
-    console.log('Answer is correct');
-  } else {
-    answer.classList.add('incorrect');
-    console.log('Answer is wrong');
   }
 }
