@@ -148,10 +148,10 @@ function nextQuestion() {
 previousButton.addEventListener('click', previousQuestion);
 
 function previousQuestion() {
-  currentQuestionIndex--;
-  pageCounter--;
-
   if (pageCounter > questions.length - questions.length + 1) {
+    currentQuestionIndex--;
+    pageCounter--;
+
     questionText.innerText = questions[currentQuestionIndex].question;
     progressText.innerText = `${pageCounter} / ${questions.length}`;
 
@@ -177,7 +177,7 @@ function restartQuiz() {
 
   const totalScore = document.createElement('p');
   totalScore.classList.add('total-score');
-  totalScore.innerText = `You've got ${correctAnswers} out of 6 questions right.`;
+  totalScore.innerText = `You answered ${correctAnswers} out of 6 questions right.`;
   container.appendChild(totalScore);
 
   const restartButtonContainer = document.createElement('div');
