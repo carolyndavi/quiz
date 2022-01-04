@@ -134,7 +134,7 @@ function previousQuestion() {
     return;
   }
   currentQuestionIndex--;
-  pageCounter.innerText = `${currentQuestionIndex + 1} / 6`;
+  pageCounter.innerText = `${currentQuestionIndex + 1} / ${questions.length}`;
   quizQuestion.innerText = questions[currentQuestionIndex].question;
 
   const possibleOptions = questions[currentQuestionIndex].option;
