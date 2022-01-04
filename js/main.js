@@ -175,10 +175,10 @@ function restartQuiz() {
   quizContainer.classList.add('hide-element');
   buttonContainer.classList.add('hide-element');
 
-  const totalScore = document.createElement('p');
-  totalScore.classList.add('total-score');
-  totalScore.innerText = `You answered ${correctAnswers} out of 6 questions right.`;
-  container.appendChild(totalScore);
+  const results = document.createElement('p');
+  results.classList.add('results');
+  results.innerText = `You answered ${correctAnswers} out of 6 questions right.`;
+  container.appendChild(results);
 
   const restartButtonContainer = document.createElement('div');
   restartButtonContainer.classList.add('button-container');
@@ -188,4 +188,11 @@ function restartQuiz() {
   restartButton.classList.add('restart-button');
   restartButton.innerText = 'Restart';
   restartButtonContainer.appendChild(restartButton);
+
+  restartButton.addEventListener('click', () => {
+    restartButton.classList.add('hide-element');
+    results.classList.add('hide-element');
+    startButton.classList.remove('hide-element');
+    startButton.addEventListener('click', () => {});
+  });
 }
