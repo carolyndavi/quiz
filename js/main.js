@@ -3,14 +3,9 @@ import questions from './questions.js';
 
 // starting variables
 let correctAnswers = 0;
-let pageCounter = 0;
-let currentQuestionIndex;
-
-let progressText;
-let questionText;
-let optionText;
-let possibleOptions;
-let allOptionElements;
+let pageCounter;
+let quizQuestion;
+let currentQuestionIndex = 0;
 
 // creating and selecting elements
 const container = document.querySelector('.container');
@@ -23,11 +18,6 @@ container.appendChild(startButton);
 const quizContainer = document.createElement('div');
 quizContainer.classList.add('quiz-container', 'hide-element');
 container.appendChild(quizContainer);
-
-const quizTitle = document.createElement('h1');
-quizTitle.classList.add('quiz-title');
-quizTitle.innerHTML = 'Math Problem';
-quizContainer.appendChild(quizTitle);
 
 const buttonContainer = document.createElement('div');
 buttonContainer.classList.add('button-container', 'hide-element');
@@ -43,69 +33,62 @@ nextButton.classList.add('next-button');
 nextButton.innerHTML = 'Next';
 buttonContainer.appendChild(nextButton);
 
-// if start button is clicked
-startButton.addEventListener('click', startQuiz);
+// if start button is clicked start quiz
+startButton.addEventListener('click', () => {
+  startQuiz();
+});
 
-function startQuiz() {
+// start quiz function
+const startQuiz = () => {
   startButton.classList.add('hide-element');
   quizContainer.classList.remove('hide-element');
   buttonContainer.classList.remove('hide-element');
 
-  const progressContainer = document.createElement('div');
-  progressContainer.classList.add('progress-container');
-  quizContainer.appendChild(progressContainer);
+  const quizTitle = document.createElement('h1');
+  quizTitle.classList.add('quiz-title');
+  quizTitle.innerHTML = 'Math Problem';
+  quizContainer.appendChild(quizTitle);
 
-  progressText = document.createElement('span');
-  progressText.classList.add('progress-text');
-  progressText.innerText = `${pageCounter + 1} / ${questions.length}`;
-  progressContainer.appendChild(progressText);
+  const pageCounterContainer = document.createElement('div');
+  pageCounterContainer.classList.add('page-counter-container');
+  quizContainer.appendChild(pageCounterContainer);
 
-  pageCounter++;
-  currentQuestionIndex = 0;
+  pageCounter = document.createElement('span');
+  pageCounter.classList.add('page-counter-text');
+  pageCounter.innerText = `${currentQuestionIndex + 1} / ${questions.length}`;
+  pageCounterContainer.appendChild(pageCounter);
 
-  createQuestions();
-  showChoices();
-}
+  createQuestion();
+};
 
-// create question function
-function createQuestions() {
+// creating questions function
+const createQuestion = () => {
+  const quizContainer = document.querySelector('.quiz-container');
+
   const questionContainer = document.createElement('div');
   questionContainer.classList.add('question-container');
   quizContainer.appendChild(questionContainer);
 
-  questionText = document.createElement('h2');
-  questionText.classList.add('question-text');
-  questionText.innerText = questions[currentQuestionIndex].question;
-  questionContainer.appendChild(questionText);
-}
+  quizQuestion = document.createElement('h2');
+  quizQuestion.classList.add('quiz-question');
+  quizQuestion.innerText = questions[currentQuestionIndex].question;
+  questionContainer.appendChild(quizQuestion);
 
-// getting choices from array
-function showChoices() {
   const optionContainer = document.createElement('div');
   optionContainer.classList.add('option-container');
   quizContainer.appendChild(optionContainer);
 
-  for (let i = 1; i < questions.length; i++) {
-    const optionList = document.createElement('div');
-    optionList.classList.add('option-list');
-    optionContainer.appendChild(optionList);
-
-    const optionNumber = document.createElement('div');
-    optionNumber.classList.add('option-number') + [i];
-    optionNumber.innerText = i;
-    optionList.appendChild(optionNumber);
-
-    optionText = document.createElement('div');
-    optionText.classList.add('option-text');
-    optionText.innerText = questions[currentQuestionIndex].option[i - 1];
-    optionList.appendChild(optionText);
-
-    optionList.addEventListener('click', selectAnswer);
+  for (let option of questions[currentQuestionIndex].option) {
+    const options = document.createElement('div');
+    options.classList.add('option');
+    options.innerText = option;
+    optionContainer.appendChild(options);
+    options.addEventListener('click', getResults);
   }
-}
+};
 
 //  select answer and check if answer is correct or incorrect
-function selectAnswer(event) {
+function getResults(event) {
   const userAnswer = event.target.innerText;
   const correctAnswer = questions[currentQuestionIndex].answer;
   console.log(userAnswer, correctAnswer);
@@ -122,21 +105,20 @@ function selectAnswer(event) {
 nextButton.addEventListener('click', nextQuestion);
 
 function nextQuestion() {
-  if (pageCounter < questions.length) {
+  if (currentQuestionIndex < questions.length - 1) {
     currentQuestionIndex++;
-    pageCounter++;
 
-    questionText.innerText = questions[currentQuestionIndex].question;
-    progressText.innerText = `${pageCounter} / ${questions.length}`;
+    pageCounter.innerText = `${currentQuestionIndex + 1} / ${questions.length}`;
+    quizQuestion.innerText = questions[currentQuestionIndex].question;
 
-    possibleOptions = questions[currentQuestionIndex].option;
-    allOptionElements = document.querySelectorAll('.option-text');
+    const possibleOptions = questions[currentQuestionIndex].option;
+    const allOptionElements = document.querySelectorAll('.option');
 
     for (let i = 0; i < possibleOptions.length; i++) {
       allOptionElements[i].innerText = possibleOptions[i];
     }
 
-    if (pageCounter === questions.length) {
+    if (currentQuestionIndex === questions.length - 1) {
       nextButton.innerText = 'Finish';
     }
   } else {
@@ -148,36 +130,32 @@ function nextQuestion() {
 previousButton.addEventListener('click', previousQuestion);
 
 function previousQuestion() {
-  if (pageCounter > questions.length - questions.length + 1) {
-    currentQuestionIndex--;
-    pageCounter--;
+  if (currentQuestionIndex === 0) {
+    return;
+  }
+  currentQuestionIndex--;
+  pageCounter.innerText = `${currentQuestionIndex + 1} / 6`;
+  quizQuestion.innerText = questions[currentQuestionIndex].question;
 
-    questionText.innerText = questions[currentQuestionIndex].question;
-    progressText.innerText = `${pageCounter} / ${questions.length}`;
+  const possibleOptions = questions[currentQuestionIndex].option;
+  const allOptionElements = document.querySelectorAll('.option');
 
-    possibleOptions = questions[currentQuestionIndex].option;
-    allOptionElements = document.querySelectorAll('.option-text');
+  for (let i = 0; i < possibleOptions.length; i++) {
+    allOptionElements[i].innerText = possibleOptions[i];
+  }
 
-    for (let i = 0; i < possibleOptions.length; i++) {
-      allOptionElements[i].innerText = possibleOptions[i];
-    }
-
-    if (pageCounter === questions.length) {
-      nextButton.innerText = 'Next';
-    }
-  } else {
-    console.log('start questions');
+  if (currentQuestionIndex < questions.length) {
+    nextButton.innerText = 'Next';
   }
 }
 
 // restart quiz
-function restartQuiz() {
+const restartQuiz = () => {
   quizContainer.classList.add('hide-element');
   buttonContainer.classList.add('hide-element');
 
   const results = document.createElement('p');
   results.classList.add('results');
-  results.innerText = `You answered ${correctAnswers} out of 6 questions right.`;
   container.appendChild(results);
 
   const restartButtonContainer = document.createElement('div');
@@ -189,10 +167,28 @@ function restartQuiz() {
   restartButton.innerText = 'Restart';
   restartButtonContainer.appendChild(restartButton);
 
+  if (correctAnswers <= 3) {
+    results.innerText = `BOOHOO! You answered ${correctAnswers} out of 6 questions right. Better luck next time!`;
+  } else {
+    results.innerText = `YAY! You answered ${correctAnswers} out of 6 questions right. Good Job!`;
+  }
+
   restartButton.addEventListener('click', () => {
     restartButton.classList.add('hide-element');
     results.classList.add('hide-element');
     startButton.classList.remove('hide-element');
-    startButton.addEventListener('click', () => {});
+    startButton.addEventListener('click', () => {
+      resetQuiz();
+      startQuiz();
+    });
   });
+};
+
+function resetQuiz() {
+  currentQuestionIndex = 0;
+  correctAnswers = 0;
+  nextButton.innerText = 'Next';
+  while (quizContainer.firstChild) {
+    quizContainer.removeChild(quizContainer.firstChild);
+  }
 }
