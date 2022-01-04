@@ -90,15 +90,20 @@ const createQuestion = () => {
 //  select answer and check if answer is correct or incorrect
 function getResults(event) {
   const userAnswer = event.target.innerText;
+  const optionList = document.querySelectorAll('.option');
   const correctAnswer = questions[currentQuestionIndex].answer;
-  console.log(userAnswer, correctAnswer);
-  if (userAnswer === correctAnswer) {
-    console.log('correct!');
-    correctAnswers++;
-    console.log(correctAnswers);
-  } else {
-    console.log('incorrect!');
-  }
+  console.log(optionList);
+
+  optionList.forEach(function (answer) {
+    if (userAnswer === correctAnswer) {
+      answer.classList.add('correct');
+      correctAnswers++;
+      console.log('correct!');
+    } else {
+      answer.classList.add('incorrect');
+      console.log('incorrect!');
+    }
+  });
 }
 
 // if next button is clicked
@@ -133,7 +138,9 @@ function previousQuestion() {
   if (currentQuestionIndex === 0) {
     return;
   }
+
   currentQuestionIndex--;
+
   pageCounter.innerText = `${currentQuestionIndex + 1} / ${questions.length}`;
   quizQuestion.innerText = questions[currentQuestionIndex].question;
 
@@ -167,10 +174,10 @@ const restartQuiz = () => {
   restartButton.innerText = 'Restart';
   restartButtonContainer.appendChild(restartButton);
 
-  if (correctAnswers <= 3) {
-    results.innerText = `BOOHOO! You answered ${correctAnswers} out of 6 questions right. Better luck next time!`;
+  if (correctAnswers < 3) {
+    results.innerText = `BOOHOO! You answered ${correctAnswers} out of ${questions.length} questions right. Better luck next time!`;
   } else {
-    results.innerText = `YAY! You answered ${correctAnswers} out of 6 questions right. Good Job!`;
+    results.innerText = `YAY! You answered ${correctAnswers} out of ${questions.length} questions right. Good Job!`;
   }
 
   restartButton.addEventListener('click', () => {
@@ -184,6 +191,7 @@ const restartQuiz = () => {
   });
 };
 
+// reset quiz
 function resetQuiz() {
   currentQuestionIndex = 0;
   correctAnswers = 0;

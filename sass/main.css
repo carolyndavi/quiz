@@ -142,11 +142,11 @@ body {
   left: -15px;
 }
 
-.option.correct {
+.correct {
   background-color: var(--color-correct);
 }
 
-.option.incorrect {
+.incorrect {
   background-color: var(--color-incorrect);
 }
 
