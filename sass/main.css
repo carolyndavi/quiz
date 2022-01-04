@@ -150,18 +150,6 @@ body {
   background-color: var(--color-incorrect);
 }
 
-.page-counter-container {
-  color: var(--color-secondary);
-  display: flex;
-  justify-content: center;
-  font-size: 5rem;
-  padding: 1rem 0;
-}
-
-.results {
-  font-size: 5rem;
-}
-
 .question-container {
   background: var(--color-white);
   border-radius: 10px;
@@ -190,6 +178,14 @@ body {
   padding-top: 3rem;
 }
 
-.quiz-counter {
-  font-size: 2rem;
+.page-counter-container {
+  color: var(--color-secondary);
+  display: flex;
+  justify-content: center;
+  font-size: 5rem;
+  padding: 1rem 0;
+}
+
+.results {
+  font-size: 5rem;
 }/*# sourceMappingURL=main.css.map */
