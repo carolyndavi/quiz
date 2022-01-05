@@ -88,23 +88,7 @@ const createQuestion = () => {
 };
 
 //  select answer and check if answer is correct or incorrect
-function getResults(event) {
-  // const userAnswer = event.target.innerText;
-  // const optionList = document.querySelectorAll('.option');
-  // const correctAnswer = questions[currentQuestionIndex].answer;
-  // console.log(optionList);
-
-  // optionList.forEach(function (answer) {
-  //   if (userAnswer === correctAnswer) {
-  //     answer.classList.add('correct');
-  //     correctAnswers++;
-  //     console.log('correct!', answer);
-  //   } else {
-  //     answer.classList.add('incorrect');
-  //     console.log('incorrect!');
-  //   }
-  // });
-
+const getResults = event => {
   const allOptions = document.querySelectorAll('.option');
   const userAnswer = event.target.innerText;
   const correctAnswer = questions[currentQuestionIndex].answer;
@@ -118,12 +102,10 @@ function getResults(event) {
   } else {
     console.log('INCORRECT ANSWER');
   }
-}
+};
 
-// if next button is clicked
-nextButton.addEventListener('click', nextQuestion);
-
-function nextQuestion() {
+// next question functionality
+const nextQuestion = () => {
   if (currentQuestionIndex < questions.length - 1) {
     currentQuestionIndex++;
 
@@ -143,16 +125,16 @@ function nextQuestion() {
   } else {
     restartQuiz();
   }
-}
+};
 
-// if previous button is clicked
-previousButton.addEventListener('click', previousQuestion);
+// if next button is clicked
+nextButton.addEventListener('click', nextQuestion);
 
-function previousQuestion() {
+// previous question functionality
+const previousQuestion = () => {
   if (currentQuestionIndex === 0) {
     return;
   }
-
   currentQuestionIndex--;
 
   pageCounter.innerText = `${currentQuestionIndex + 1} / ${questions.length}`;
@@ -168,7 +150,10 @@ function previousQuestion() {
   if (currentQuestionIndex < questions.length) {
     nextButton.innerText = 'Next';
   }
-}
+};
+
+// if previous button is clicked
+previousButton.addEventListener('click', previousQuestion);
 
 // restart quiz
 const restartQuiz = () => {
@@ -206,11 +191,11 @@ const restartQuiz = () => {
 };
 
 // reset quiz
-function resetQuiz() {
+const resetQuiz = () => {
   currentQuestionIndex = 0;
   correctAnswers = 0;
   nextButton.innerText = 'Next';
   while (quizContainer.firstChild) {
     quizContainer.removeChild(quizContainer.firstChild);
   }
-}
+};
