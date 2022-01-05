@@ -89,21 +89,35 @@ const createQuestion = () => {
 
 //  select answer and check if answer is correct or incorrect
 function getResults(event) {
-  const userAnswer = event.target.innerText;
-  const optionList = document.querySelectorAll('.option');
-  const correctAnswer = questions[currentQuestionIndex].answer;
-  console.log(optionList);
+  // const userAnswer = event.target.innerText;
+  // const optionList = document.querySelectorAll('.option');
+  // const correctAnswer = questions[currentQuestionIndex].answer;
+  // console.log(optionList);
 
-  optionList.forEach(function (answer) {
-    if (userAnswer === correctAnswer) {
-      answer.classList.add('correct');
-      correctAnswers++;
-      console.log('correct!');
-    } else {
-      answer.classList.add('incorrect');
-      console.log('incorrect!');
-    }
-  });
+  // optionList.forEach(function (answer) {
+  //   if (userAnswer === correctAnswer) {
+  //     answer.classList.add('correct');
+  //     correctAnswers++;
+  //     console.log('correct!', answer);
+  //   } else {
+  //     answer.classList.add('incorrect');
+  //     console.log('incorrect!');
+  //   }
+  // });
+
+  const allOptions = document.querySelectorAll('.option');
+  const userAnswer = event.target.innerText;
+  const correctAnswer = questions[currentQuestionIndex].answer;
+  console.log('ALL OPTIONS:', allOptions);
+  console.log('USER ANSWER:', userAnswer);
+  console.log('CORRECT ANSWER:', correctAnswer);
+
+  if (userAnswer === correctAnswer) {
+    correctAnswers++;
+    console.log('CORRECT ANSWERS:', correctAnswers);
+  } else {
+    console.log('INCORRECT ANSWER');
+  }
 }
 
 // if next button is clicked
@@ -181,7 +195,7 @@ const restartQuiz = () => {
   }
 
   restartButton.addEventListener('click', () => {
-    restartButton.classList.add('hide-element');
+    restartButtonContainer.classList.add('hide-element');
     results.classList.add('hide-element');
     startButton.classList.remove('hide-element');
     startButton.addEventListener('click', () => {

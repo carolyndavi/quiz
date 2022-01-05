@@ -39,6 +39,7 @@ body {
 .start-button,
 .restart-button {
   background-color: var(--color-primary);
+  color: var(--color-secondary);
   width: 12rem;
   height: 6rem;
   border: none;
@@ -187,5 +188,5 @@ body {
 }
 
 .results {
-  font-size: 5rem;
+  font-size: 4rem;
 }/*# sourceMappingURL=main.css.map */
