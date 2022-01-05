@@ -50,31 +50,6 @@
     content: "5";
     @include option-position("start");
   }
-
-  // &:nth-child(1)::after {
-  //   content: "1";
-  //   @include option-left;
-  // }
-
-  // &:nth-child(2)::after {
-  //   content: "2";
-  //   @include option-right;
-  // }
-
-  // &:nth-child(3)::after {
-  //   content: "3";
-  //   @include option-left;
-  // }
-
-  // &:nth-child(4)::after {
-  //   content: "4";
-  //   @include option-right;
-  // }
-
-  // &:nth-child(5)::after {
-  //   content: "5";
-  //   @include option-left;
-  // }
 }
 
 .correct {
