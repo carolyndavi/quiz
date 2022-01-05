@@ -1,4 +1,4 @@
-@mixin option-left {
+@mixin option-position($position: null) {
   font-size: 2rem;
   position: absolute;
   border: 1.5rem solid var(--color-primary);
@@ -6,16 +6,12 @@
   height: 80px;
   padding-top: 1rem;
   border-radius: 50%;
-  left: -15px;
-}
 
-@mixin option-right {
-  font-size: 2rem;
-  position: absolute;
-  border: 1.5rem solid var(--color-primary);
-  width: 80px;
-  height: 80px;
-  padding-top: 1rem;
-  border-radius: 50%;
-  right: -15px;
+  @if ($position == "start") {
+    left: -15px;
+  } @else if ($position == "end") {
+    right: -15px;
+  } @else {
+    @warn 'You need to pick a position "end" or "start"';
+  }
 }

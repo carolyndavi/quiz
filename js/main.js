@@ -88,20 +88,21 @@ const createQuestion = () => {
 };
 
 //  select answer and check if answer is correct or incorrect
-const getResults = event => {
-  const allOptions = document.querySelectorAll('.option');
-  const userAnswer = event.target.innerText;
-  const correctAnswer = questions[currentQuestionIndex].answer;
+const getResults = () => {
+  const allOptions = Array.from(document.querySelectorAll('.option'));
   console.log('ALL OPTIONS:', allOptions);
-  console.log('USER ANSWER:', userAnswer);
-  console.log('CORRECT ANSWER:', correctAnswer);
+  const correctAnswer = questions[currentQuestionIndex].answer;
 
-  if (userAnswer === correctAnswer) {
-    correctAnswers++;
-    console.log('CORRECT ANSWERS:', correctAnswers);
-  } else {
-    console.log('INCORRECT ANSWER');
-  }
+  allOptions.forEach(answer => {
+    if (answer.innerText === correctAnswer) {
+      console.log('correct!');
+      answer.classList.add('correct');
+      correctAnswers++;
+      console.log('CORRECT ANSWERS:', correctAnswers);
+    } else {
+      answer.classList.add('incorrect');
+    }
+  });
 };
 
 // next question functionality
