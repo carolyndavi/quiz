@@ -3,9 +3,10 @@ import questions from './questions.js';
 
 // starting variables
 let correctAnswers = 0;
+let currentQuestionIndex = 0;
+let datasetIndex = 1;
 let pageCounter;
 let quizQuestion;
-let currentQuestionIndex = 0;
 
 // creating and selecting elements
 const container = document.querySelector('.container');
@@ -49,6 +50,13 @@ const startQuiz = () => {
   quizTitle.innerHTML = 'Math Problem';
   quizContainer.appendChild(quizTitle);
 
+  createPageCounter();
+  createQuestion();
+  createOptions();
+};
+
+// creating page counter function
+const createPageCounter = () => {
   const pageCounterContainer = document.createElement('div');
   pageCounterContainer.classList.add('page-counter-container');
   quizContainer.appendChild(pageCounterContainer);
@@ -57,8 +65,6 @@ const startQuiz = () => {
   pageCounter.classList.add('page-counter-text');
   pageCounter.innerText = `${currentQuestionIndex + 1} / ${questions.length}`;
   pageCounterContainer.appendChild(pageCounter);
-
-  createQuestion();
 };
 
 // creating questions function
@@ -73,7 +79,10 @@ const createQuestion = () => {
   quizQuestion.classList.add('quiz-question');
   quizQuestion.innerText = questions[currentQuestionIndex].question;
   questionContainer.appendChild(quizQuestion);
+};
 
+// create options function
+const createOptions = () => {
   const optionContainer = document.createElement('div');
   optionContainer.classList.add('option-container');
   quizContainer.appendChild(optionContainer);
@@ -81,27 +90,30 @@ const createQuestion = () => {
   for (let option of questions[currentQuestionIndex].option) {
     const options = document.createElement('div');
     options.classList.add('option');
+    options.setAttribute('data-number', datasetIndex++);
     options.innerText = option;
     optionContainer.appendChild(options);
-    options.addEventListener('click', getResults);
   }
-};
 
-//  select answer and check if answer is correct or incorrect
-const getResults = () => {
-  const allOptions = Array.from(document.querySelectorAll('.option'));
-  console.log('ALL OPTIONS:', allOptions);
+  const optionsArray = Array.from(document.querySelectorAll('.option'));
+  console.log('OPTIONS ARRAY:', optionsArray);
   const correctAnswer = questions[currentQuestionIndex].answer;
+  console.log('CORRECT ANSWER:', correctAnswer);
 
-  allOptions.forEach(answer => {
-    if (answer.innerText === correctAnswer) {
-      console.log('correct!');
-      answer.classList.add('correct');
-      correctAnswers++;
-      console.log('CORRECT ANSWERS:', correctAnswers);
-    } else {
-      answer.classList.add('incorrect');
-    }
+  optionsArray.forEach(option => {
+    option.addEventListener('click', e => {
+      const selectedOption = e.target;
+      const selectedAnswer = selectedOption.dataset['number'];
+      console.log('SELECTED DATASET:', selectedAnswer);
+
+      if (selectedOption.innerText === correctAnswer) {
+        selectedOption.classList.add('correct');
+        correctAnswers++;
+        console.log('CORRECT ANSWERS:', correctAnswers);
+      } else if (selectedOption.innerText !== correctAnswer) {
+        selectedOption.classList.add('incorrect');
+      }
+    });
   });
 };
 

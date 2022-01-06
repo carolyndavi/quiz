@@ -1,4 +1,4 @@
-@mixin option-position($position: null) {
+@mixin option-position($position) {
   font-size: 2rem;
   position: absolute;
   border: 1.5rem solid var(--color-primary);
