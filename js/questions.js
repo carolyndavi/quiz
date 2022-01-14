@@ -29,6 +29,6 @@ const questions = [
     option: ['170', '18', '5', '2', '26'],
     answer: '5',
   },
-];
+]
 
-export default questions;
+export default questions
